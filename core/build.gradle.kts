@@ -3,9 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     kotlin("multiplatform")
-    id("org.jmailen.kotlinter")
-    id("org.jetbrains.dokka")
-    id("com.vanniktech.maven.publish")
 }
 
 kotlin {
@@ -24,14 +21,14 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":external"))
+            api(project(":third_party:indexeddb:external"))
 
-            api(libs.coroutines.core)
+            api(libs.kotlinx.coroutines.core)
         }
 
         commonTest.dependencies {
             implementation(kotlin("test"))
-            implementation(libs.coroutines.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         jsTest.dependencies {
@@ -40,6 +37,9 @@ kotlin {
 
         wasmJsTest.dependencies {
             implementation(kotlin("test-wasm-js"))
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.kotlinx.browser)
         }
     }
 }

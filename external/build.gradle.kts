@@ -3,9 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     kotlin("multiplatform")
-    id("org.jmailen.kotlinter")
-    id("org.jetbrains.dokka")
-    id("com.vanniktech.maven.publish")
 }
 
 kotlin {
@@ -20,6 +17,12 @@ kotlin {
     wasmJs {
         browser()
         binaries.library()
+    }
+
+    sourceSets {
+        wasmJsMain.dependencies {
+            implementation(libs.kotlinx.browser)
+        }
     }
 }
 
